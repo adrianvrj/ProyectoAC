@@ -1,12 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
 </head>
+<style>
+    body {
+        background-color: black;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .maindiv {
+        margin-left: 38%;
+        font-size: xx-large;
+    }
+
+    .filterform {
+        font-size: medium;
+    }
+
+    .maindiv h1 {
+        margin-left: 5%;
+    }
+
+    .tablaplanilla {
+        margin-top: 3%;
+        border-collapse: collapse;
+        margin-left: 5%;
+    }
+
+    th {
+        background-color: white;
+        color: black;
+        border: 1px solid white;
+        padding: 8px;
+        text-align: left;
+    }
+
+    td {
+        border: 1px solid white;
+        padding: 8px;
+        text-align: left;
+        color: black;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
+
 <body>
-    <h1>Hola</h1>
+    <div class="maindiv">
+        <h1>SICPLA</h1>
+        <div class="filterform">
+            <h5>Buscar planilla por mes</h5>
+            <form action="filtrarPlanilla">
+                <select name="mes">
+                    <option value="">Selecciona un mes</option>
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+                <select name="anio">
+                    <option value="">Selecciona el año</option>
+                    <option value="2023">2023</option>
+                </select>
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+    <div class="tablaplanilla">
+        <table id="planilla" class="tablaplanilla">
+            <tr>
+                <th>Número de planilla</th>
+                <th>Cédula del empleado</th>
+                <th>Deducciones obrero</th>
+                <th>Deducciones patronales</th>
+                <th>Impuesto de renta al salario</th>
+                <th>Salario bruto</th>
+                <th>Salario total</th>
+            </tr>
+            <tr>
+                <td>Dato 1</td>
+                <td>Dato 2</td>
+                <td>Dato 3</td>
+                <td>Dato 4</td>
+                <td>Dato 5</td>
+                <td>Dato 6</td>
+                <td>Dato 7</td>
+              </tr>
+        </table>
+    </div>
 </body>
+
 </html>
