@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../db');
 
-const DeduccionObrero = sequelize.define('DEDUCCIONOBRERO', {
+const DeduccionObrero = sequelize.define('DEDUCCIONESOBRERO', {
   fecha: {
     type: DataTypes.DATE,
     primaryKey: true,
