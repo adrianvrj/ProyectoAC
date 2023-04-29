@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+</head>
+<style>
+    body {
+        background-color: black;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .maindiv {
+        margin-left: 38%;
+        font-size: xx-large;
+    }
+
+    .maindiv h1 {
+        margin-left: 5%;
+    }
+
+    .reporte{
+        margin-left: 5%;
+    }
+    .deducciones{
+        margin-left: 5%;
+    }
+</style>
+
+<body>
+    <div class="maindiv">
+        <h1>SICPLA</h1>
+    </div>
+    <div class="reporte">
+        <h2>Número de planilla: <%= reporte.nplanilla %></h2>
+        <h3>Cédula del empleado; <%= reporte.cedula %></h3>
+        <h4>Deducciones obrero</h4>
+        <div class="deducciones">
+            <p>CSS: <%= reporte.ccssobrero %></p><br>
+            <p>Banco Popular: <%= reporte.bpobrero %></p><br>
+            <p>Asociacion solidarista: <%= reporte.as %></p><br>
+            <h4>Total: <%= reporte.totalobrero %></h4>
+        </div>
+        <h4>Deducciones patronales</h4>
+        <div class="deducciones">
+            <p>CCSS: <%= reporte.ccsspatronal %></p><br>
+            <p>Aguinaldo: <%= reporte.aguinaldo %></p><br>
+            <p>Cesantia: <%= reporte.cesantia %></p><br>
+            <p>Vacaciones: <%= reporte.vacaciones %></p><br>
+            <p>Riesgo de trabajo INS: <%= reporte.ins %></p><br>
+            <h4>Total: <%= reporte.totalpatronales %></h4>
+        </div>
+        <h4>Salario bruto: <%= reporte.salariobruto %></h4>
+        <h4>Salario total: <%= reporte.salariototal %></h4>
+        <h4>Fecha: <%= reporte.fecha %></h4>
+    </div>
+    <a style="color: white" href="/">Atrás</a>
+</body>
+</html>

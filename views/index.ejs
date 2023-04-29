@@ -30,8 +30,7 @@
     .tablaplanilla {
         margin-top: 3%;
         border-collapse: collapse;
-        margin-left: 3%;
-        border-radius: 20%;
+        margin-left: 1%;
     }
 
     th {
@@ -47,6 +46,7 @@
         padding: 8px;
         text-align: left;
         color: black;
+        background-color: white;
     }
 
     tr:nth-child(even) {
@@ -59,8 +59,8 @@
         <h1>SICPLA</h1>
         <div class="filterform">
             <h5>Buscar planilla por mes</h5>
-            <form action="filtrarPlanilla">
-                <select name="mes">
+            <form method="post" action="filtrarPlanilla">
+                <select onchange="mes()" id="mes" name="mes">
                     <option value="">Selecciona un mes</option>
                     <option value="01">Enero</option>
                     <option value="02">Febrero</option>
@@ -81,6 +81,10 @@
                 </select>
                 <button type="submit">Buscar</button>
             </form>
+            <form method="post" action="generarPlanilla">
+                <input type="text" value="" name="mes" id="mesGen" hidden>
+                <button id="generarPlanilla" type="submit">Generar planilla</button>
+            </form>
         </div>
     </div>
     <div class="tablaplanilla">
@@ -93,20 +97,53 @@
                 <th>Impuesto de renta al salario</th>
                 <th>Salario bruto</th>
                 <th>Salario total</th>
+                <th>Fecha</th>
                 <th>Reporte</th>
             </tr>
-            <tr>
-                <td>Dato 1</td>
-                <td>Dato 2</td>
-                <td>Dato 3</td>
-                <td>Dato 4</td>
-                <td>Dato 5</td>
-                <td>Dato 6</td>
-                <td>Dato 7</td>
-                <td>Dato 8</td>
-              </tr>
         </table>
     </div>
 </body>
-
+<script>
+    document.getElementById('mesGen').value = <%- (mes) %>;
+    var planillas = <%- (planillas) %>;
+    const n = planillas.length;
+    if(n > 0){
+        document.getElementById('generarPlanilla').disabled = true;
+    }
+    const table = document.getElementById('planilla');
+    for(let planilla of planillas){
+        var tr = document.createElement('tr');
+        var nplanilla = document.createElement('td');
+        nplanilla.textContent = planilla.nplanilla;
+        var cedula = document.createElement('td');
+        cedula.textContent = planilla.cedula;
+        var deduccionesobrero = document.createElement('td');
+        deduccionesobrero.textContent = planilla.deduccionesobrero;
+        var deduccionespatronales = document.createElement('td');
+        deduccionespatronales.textContent = planilla.deduccionespatronales;
+        var impuestorentasalario = document.createElement('td');
+        impuestorentasalario.textContent = planilla.impuestorentasalario;
+        var salariobruto = document.createElement('td');
+        salariobruto.textContent = planilla.salariobruto;
+        var salariototal = document.createElement('td');
+        salariototal.textContent = planilla.salariototal;
+        var fecha = document.createElement('td');
+        fecha.textContent = planilla.fecha;
+        var reporte = document.createElement('td');
+        var a = document.createElement('a');
+        a.textContent = 'Ir al reporte';
+        a.href = '/report/' + planilla.cedula + '/' + planilla.fecha + '/' + planilla.nplanilla;
+        reporte.appendChild(a);
+        tr.appendChild(nplanilla);
+        tr.appendChild(cedula);
+        tr.appendChild(deduccionesobrero);
+        tr.appendChild(deduccionespatronales);
+        tr.appendChild(impuestorentasalario);
+        tr.appendChild(salariobruto);
+        tr.appendChild(salariototal);
+        tr.appendChild(fecha);
+        tr.appendChild(reporte);
+        table.appendChild(tr);
+    };
+</script>
 </html>
