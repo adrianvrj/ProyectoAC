@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const Sequelize = require('sequelize');
 const app = express();
-
+const paginate = require('paginate-array');
 const sequelize = require('./db');
 const Emplyee = require('./models/employee');
 const Planilla = require('./models/planilla');
@@ -58,9 +58,15 @@ app.get('/', async function (req, res) {
     }
     planillas.push(reg);
   });
+  const currentPage = parseInt(req.query.page) || 1;
+  const pageSize = 5; // Number of items per page
+
+  const paginatedData = paginate(planilla, currentPage, pageSize);
+
   res.render("index", {
     planillas: JSON.stringify(planillas),
-    mes: month
+    mes: month,
+    data: paginatedData 
   });
 });
 

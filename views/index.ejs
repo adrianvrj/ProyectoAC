@@ -89,61 +89,50 @@
     </div>
     <div class="tablaplanilla">
         <table id="planilla" class="tablaplanilla">
-            <tr>
-                <th>Número de planilla</th>
-                <th>Cédula del empleado</th>
-                <th>Deducciones obrero</th>
-                <th>Deducciones patronales</th>
-                <th>Impuesto de renta al salario</th>
-                <th>Salario bruto</th>
-                <th>Salario total</th>
-                <th>Fecha</th>
-                <th>Reporte</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Número de planilla</th>
+                    <th>Cédula del empleado</th>
+                    <th>Deducciones obrero</th>
+                    <th>Deducciones patronales</th>
+                    <th>Impuesto de renta al salario</th>
+                    <th>Salario bruto</th>
+                    <th>Salario total</th>
+                    <th>Fecha</th>
+                    <th>Reporte</th>
+                </tr>
+            </thead>
+            <tbody id="tablebody">
+                <!-- Aqui van los datos dinamicos -->
+                <% data.data.forEach(item => { %>
+                    <tr>
+                      <td><%= item.nplanilla; %></td>
+                      <td><%= item.cedula %></td>
+                      <td><%= item.deduccionesobrero; %></td>
+                      <td><%= item.deduccionespatronales %></td>
+                      <td><%= item.impuestorentasalario; %></td>
+                      <td><%= item.salariobruto %></td>
+                      <td><%= item.salariototal; %></td>
+                      <td><%= item.fecha %></td>
+                      <td><a href="'/report/'<%=item.cedula %>/<%=item.fecha %>/<%=item.nplanilla%>">Reporte</a></td>
+                    </tr>
+                  <% }); %>
+            </tbody>
         </table>
+        <div style="margin-left:42%;">
+            <% if (data.totalPages > 1) { %>
+                <% if (data.currentPage != 1) { %>
+                    <a style="color:white" href="/?page=<%= data.currentPage-1 %>">Anterior</a>
+                <% }%>
+                <%= data.currentPage %>
+                <% if (data.totalPages > data.currentPage) { %>
+                    <a style="color:white" href="/?page=<%= data.currentPage+1 %>">Siguiente</a>
+                <% }%>
+            <% } %>
+          </div>
     </div>
 </body>
 <script>
     document.getElementById('mesGen').value = <%- (mes) %>;
-    var planillas = <%- (planillas) %>;
-    const n = planillas.length;
-    if(n > 0){
-        document.getElementById('generarPlanilla').disabled = true;
-    }
-    const table = document.getElementById('planilla');
-    for(let planilla of planillas){
-        var tr = document.createElement('tr');
-        var nplanilla = document.createElement('td');
-        nplanilla.textContent = planilla.nplanilla;
-        var cedula = document.createElement('td');
-        cedula.textContent = planilla.cedula;
-        var deduccionesobrero = document.createElement('td');
-        deduccionesobrero.textContent = planilla.deduccionesobrero;
-        var deduccionespatronales = document.createElement('td');
-        deduccionespatronales.textContent = planilla.deduccionespatronales;
-        var impuestorentasalario = document.createElement('td');
-        impuestorentasalario.textContent = planilla.impuestorentasalario;
-        var salariobruto = document.createElement('td');
-        salariobruto.textContent = planilla.salariobruto;
-        var salariototal = document.createElement('td');
-        salariototal.textContent = planilla.salariototal;
-        var fecha = document.createElement('td');
-        fecha.textContent = planilla.fecha;
-        var reporte = document.createElement('td');
-        var a = document.createElement('a');
-        a.textContent = 'Ir al reporte';
-        a.href = '/report/' + planilla.cedula + '/' + planilla.fecha + '/' + planilla.nplanilla;
-        reporte.appendChild(a);
-        tr.appendChild(nplanilla);
-        tr.appendChild(cedula);
-        tr.appendChild(deduccionesobrero);
-        tr.appendChild(deduccionespatronales);
-        tr.appendChild(impuestorentasalario);
-        tr.appendChild(salariobruto);
-        tr.appendChild(salariototal);
-        tr.appendChild(fecha);
-        tr.appendChild(reporte);
-        table.appendChild(tr);
-    };
 </script>
 </html>
