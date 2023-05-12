@@ -58,6 +58,7 @@ app.get('/', async function (req, res) {
     }
     planillas.push(reg);
   });
+  console.log(planillas);
   const currentPage = parseInt(req.query.page) || 1;
   const pageSize = 5; // Number of items per page
 
@@ -66,7 +67,8 @@ app.get('/', async function (req, res) {
   res.render("index", {
     planillas: JSON.stringify(planillas),
     mes: month,
-    data: paginatedData 
+    data: paginatedData,
+    filter: false
   });
 });
 
@@ -131,9 +133,15 @@ app.post('/filtrarPlanilla', async (req, res) => {
     }
     planillas.push(reg);
   });
+  const currentPage = parseInt(req.query.page) || 1;
+  const pageSize = 5; // Number of items per page
+
+  const paginatedData = paginate(planilla, currentPage, pageSize);
   res.render("index", {
-    planillas: JSON.stringify(planillas),
-    mes: month
+    data: JSON.stringify(planillas),
+    mes: month,
+    data: paginatedData,
+    filter: true
   });
 });
 

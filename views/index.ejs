@@ -114,20 +114,31 @@
                       <td><%= item.salariobruto %></td>
                       <td><%= item.salariototal; %></td>
                       <td><%= item.fecha %></td>
-                      <td><a href="'/report/'<%=item.cedula %>/<%=item.fecha %>/<%=item.nplanilla%>">Reporte</a></td>
+                      <td><a href="/report/<%=item.cedula %>/<%=item.fecha %>/<%=item.nplanilla%>">Reporte</a></td>
                     </tr>
                   <% }); %>
             </tbody>
         </table>
         <div style="margin-left:42%;">
-            <% if (data.totalPages > 1) { %>
+            <% if (filter) { %>
                 <% if (data.currentPage != 1) { %>
-                    <a style="color:white" href="/?page=<%= data.currentPage-1 %>">Anterior</a>
+                    <a style="color:white" href="/filtrarPlanilla/page=<%= data.currentPage-1 %>">Anterior</a>
                 <% }%>
                 <%= data.currentPage %>
                 <% if (data.totalPages > data.currentPage) { %>
-                    <a style="color:white" href="/?page=<%= data.currentPage+1 %>">Siguiente</a>
+                    <a style="color:white" href="/filtrarPlanilla?page=<%= data.currentPage+1 %>">Siguiente</a>
                 <% }%>
+            <% } %>
+            <% if (!filter) { %>
+                <% if (data.totalPages > 1) { %>
+                    <% if (data.currentPage != 1) { %>
+                        <a style="color:white" href="/?page=<%= data.currentPage-1 %>">Anterior</a>
+                    <% }%>
+                    <%= data.currentPage %>
+                    <% if (data.totalPages > data.currentPage) { %>
+                        <a style="color:white" href="/?page=<%= data.currentPage+1 %>">Siguiente</a>
+                    <% }%>
+                <% } %>
             <% } %>
           </div>
     </div>
